@@ -1,5 +1,5 @@
 ﻿
-namespace DBWinFormDemo1
+namespace AccessDBEditor
 {
     partial class AccessDBEditor
     {
@@ -54,6 +54,8 @@ namespace DBWinFormDemo1
             this.col_type_listview = new System.Windows.Forms.ListView();
             this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createNNewmdbFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.table_gridview)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -310,6 +312,7 @@ namespace DBWinFormDemo1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -317,11 +320,26 @@ namespace DBWinFormDemo1
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createNNewmdbFileToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // createNNewmdbFileToolStripMenuItem
+            // 
+            this.createNNewmdbFileToolStripMenuItem.Name = "createNNewmdbFileToolStripMenuItem";
+            this.createNNewmdbFileToolStripMenuItem.Size = new System.Drawing.Size(234, 26);
+            this.createNNewmdbFileToolStripMenuItem.Text = "Create New .mdb File";
+            this.createNNewmdbFileToolStripMenuItem.Click += new System.EventHandler(this.createNewmdbFileToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
-            this.aboutToolStripMenuItem.Text = "about";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // AccessDBEditor
@@ -396,6 +414,8 @@ namespace DBWinFormDemo1
         private System.Windows.Forms.Button tablegridview_refresh_btn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createNNewmdbFileToolStripMenuItem;
     }
 }
 

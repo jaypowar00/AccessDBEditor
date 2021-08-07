@@ -11,9 +11,10 @@ D:\Jay\C#\NewFolder\ModifyDBAccessFile\DBWinFormDemo1\obj\Release\AccessDBEditor
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\bin\Release\AccessDBEditor.exe.config
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\bin\Release\AccessDBEditor.exe
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\bin\Release\AccessDBEditor.pdb
-D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\DBWinFormDemo1.AccessDBEditor.resources
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\DBWinFormDemo1.Properties.Resources.resources
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor.csproj.GenerateResource.cache
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor.csproj.CoreCompileInputs.cache
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor.exe
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor.pdb
+D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDBEditor\bin\Release\File\dbfilename.mdb
+D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDBEditor\obj\Release\AccessDBEditor.AccessDBEditor.resources

@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Reflection;
 
-namespace DBWinFormDemo1
+namespace AccessDBEditor
 {
     public partial class AccessDBEditor : Form
     {
@@ -17,6 +19,7 @@ namespace DBWinFormDemo1
         OpenFileDialog openFileDialog = new OpenFileDialog();
         bool connected = false;
         string TableName = "";
+        string OpenedTableName = "";
         public AccessDBEditor()
         {
             InitializeComponent();
@@ -29,8 +32,11 @@ namespace DBWinFormDemo1
             openFileDialog.Title = "Select .mdb Access File";
             openFileDialog.Filter = "Access mdb Files (*.mdb)|*.mdb";
             openFileDialog.ShowDialog();
-            filepath_tb.Text = openFileDialog.FileName;
-            open_btn.Enabled = true;
+            if (openFileDialog.FileName != "")
+            {
+                filepath_tb.Text = openFileDialog.FileName;
+                open_btn.Enabled = true;
+            }
         }
 
         private void open_btn_Click(object sender, EventArgs e)
@@ -63,7 +69,7 @@ namespace DBWinFormDemo1
             catch (OleDbException ex)
             {
                 connected = false;
-                MessageBox.Show(this, "DB not connected!\n" + ex.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "DB not connected!\n" + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -148,6 +154,7 @@ namespace DBWinFormDemo1
                     OleDbDataAdapter da = new OleDbDataAdapter(cmd);
                     da.Fill(dt);
                     table_gridview.DataSource = dt;
+                    OpenedTableName = TableName;
                 }catch(OleDbException ex)
                 {
                     string msg = ex.Message;
@@ -163,37 +170,43 @@ namespace DBWinFormDemo1
 
         private void add_col_btn_Click(object sender, EventArgs e)
         {
-            if (column_name_tb.Text != "")
+            if (OpenedTableName != "")
             {
-                if(col_type_listview.SelectedItems.Count>1 || col_type_listview.SelectedItems.Count == 0)
+                if (column_name_tb.Text != "")
                 {
-                    MessageBox.Show(this, "Please select a Column Type!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if(col_type_listview.SelectedItems.Count>1 || col_type_listview.SelectedItems.Count == 0)
+                    {
+                        MessageBox.Show(this, "Please select a Column Type!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            string colname = column_name_tb.Text;
+                            OleDbCommand cmd = new OleDbCommand();
+                            cmd.Connection = con;
+                            cmd.CommandText = "ALTER TABLE "+TableName+" ADD COLUMN "+colname+" "+col_type_listview.SelectedItems[0].Text+";";
+                            cmd.ExecuteNonQuery();
+                            tablegridview_refresh_btn_Click(sender, e);
+                        }catch(Exception ex)
+                        {
+                            MessageBox.Show(this, "Error!\n"+ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
                 else
                 {
-                    try
-                    {
-                        string colname = column_name_tb.Text;
-                        OleDbCommand cmd = new OleDbCommand();
-                        cmd.Connection = con;
-                        cmd.CommandText = "ALTER TABLE "+TableName+" ADD COLUMN "+colname+" "+col_type_listview.SelectedItems[0].Text+";";
-                        cmd.ExecuteNonQuery();
-                        tablegridview_refresh_btn_Click(sender, e);
-                    }catch(Exception ex)
-                    {
-                        MessageBox.Show(this, "Error!\n"+ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show(this, "Please Enter Column Name!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            else
+            }else
             {
-                MessageBox.Show(this, "Please Enter Column Name!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please open a table first!");
             }
         }
 
         private void tablegridview_refresh_btn_Click(object sender, EventArgs e)
         {
-            if (connected)
+            if (connected && OpenedTableName!="")
             {
                 try
                 {
@@ -220,24 +233,31 @@ namespace DBWinFormDemo1
 
         private void del_col_btn_Click(object sender, EventArgs e)
         {
-            if (column_name_tb.Text != "")
+            if (OpenedTableName!="")
             {
-                try
+                if (column_name_tb.Text != "")
                 {
-                    string colname = column_name_tb.Text;
-                    OleDbCommand cmd = new OleDbCommand();
-                    cmd.Connection = con;
-                    cmd.CommandText = "ALTER TABLE " + TableName + " DROP COLUMN " + colname + ";";
-                    cmd.ExecuteNonQuery();
-                    tablegridview_refresh_btn_Click(sender, e);
-                }catch(Exception ex)
+                    try
+                    {
+                        string colname = column_name_tb.Text;
+                        OleDbCommand cmd = new OleDbCommand();
+                        cmd.Connection = con;
+                        cmd.CommandText = "ALTER TABLE " + TableName + " DROP COLUMN " + colname + ";";
+                        cmd.ExecuteNonQuery();
+                        tablegridview_refresh_btn_Click(sender, e);
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show(this, "Error!\n" + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
                 {
-                    MessageBox.Show(this, "Error!\n" + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please Enter Column Name!");
                 }
             }
             else
             {
-                MessageBox.Show("Please Enter Column Name!");
+                MessageBox.Show("Please open a table first!");
             }
         }
 
@@ -262,17 +282,44 @@ namespace DBWinFormDemo1
                 {
                     try
                     {
+                        TableName = table_listview.SelectedItems[0].Text;
                         OleDbCommand cmd = new OleDbCommand();
                         cmd.Connection = con;
-                        cmd.CommandText = "DROP TABLE "+table_listview.SelectedItems[0].Text+";";
+                        cmd.CommandText = "DROP TABLE "+TableName+";";
                         cmd.ExecuteNonQuery();
                         button1_Click(sender, e);
+                        if (TableName.Equals(OpenedTableName))
+                        {
+                            OpenedTableName = TableName = "";
+                            table_gridview.DataSource = null;
+                        }
                     }catch(OleDbException ex)
                     {
                         MessageBox.Show(this, "Error!\n" + ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
+        }
+
+        private void createNewmdbFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Assembly asm = Assembly.GetExecutingAssembly();
+            Stream reader = asm.GetManifestResourceStream("DBWinFormDemo1.File.dbfilename.mdb");
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.DefaultExt = ".mdb";
+            saveFile.AddExtension = true;
+            saveFile.Filter = "MS Access mdb File (*.mdb)|*.mdb";
+            saveFile.ShowDialog();
+            if (saveFile.FileName != "")
+            {
+                Stream file = saveFile.OpenFile();
+                reader.CopyTo(file);
+                reader.Close();
+                file.Close();
+                filepath_tb.Text = saveFile.FileName;
+                open_btn.Enabled = true;
+            }
+
         }
     }
 }

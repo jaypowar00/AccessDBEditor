@@ -114,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccessDBEditor.ico" />
+    <EmbeddedResource Include="File\dbfilename.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
