@@ -182,7 +182,7 @@ namespace AccessDBEditor
             this.create_table_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.create_table_btn.Location = new System.Drawing.Point(382, 142);
             this.create_table_btn.Name = "create_table_btn";
-            this.create_table_btn.Size = new System.Drawing.Size(158, 30);
+            this.create_table_btn.Size = new System.Drawing.Size(158, 71);
             this.create_table_btn.TabIndex = 10;
             this.create_table_btn.Text = "Create Empty Table";
             this.create_table_btn.UseVisualStyleBackColor = true;
@@ -191,7 +191,7 @@ namespace AccessDBEditor
             // open_table_btn
             // 
             this.open_table_btn.Enabled = false;
-            this.open_table_btn.Location = new System.Drawing.Point(401, 205);
+            this.open_table_btn.Location = new System.Drawing.Point(401, 235);
             this.open_table_btn.Name = "open_table_btn";
             this.open_table_btn.Size = new System.Drawing.Size(117, 34);
             this.open_table_btn.TabIndex = 11;
@@ -203,7 +203,7 @@ namespace AccessDBEditor
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(358, 212);
+            this.label4.Location = new System.Drawing.Point(358, 242);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(26, 20);
             this.label4.TabIndex = 12;
@@ -213,7 +213,7 @@ namespace AccessDBEditor
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(542, 212);
+            this.label5.Location = new System.Drawing.Point(542, 242);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(26, 20);
             this.label5.TabIndex = 12;

@@ -18,3 +18,4 @@ D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDbEditor\obj\Release\AccessDBEditor.pdb
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDBEditor\bin\Release\File\dbfilename.mdb
 D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDBEditor\obj\Release\AccessDBEditor.AccessDBEditor.resources
+D:\Jay\C#\NewFolder\ModifyDBAccessFile\AccessDBEditor\obj\Release\AccessDBEditor.csproj.AssemblyReference.cache
